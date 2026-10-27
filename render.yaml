@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: platematch-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: CATALOG_PATH
+        value: data/catalog.parquet
+      - key: SERVE_UI
+        value: "false"
+      - key: LLM_PROVIDER
+        value: groq
+      - key: LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: LLM_TEMPERATURE
+        value: "0.3"
+      - key: LLM_MAX_COMPLETION_TOKENS
+        value: "350"
+      - key: LLM_REASONING_EFFORT
+        value: low
+      - key: SHORTLIST_SIZE
+        value: "10"
+      - key: DEFAULT_TOP_K
+        value: "3"
+      - key: CACHE_TTL_SECONDS
+        value: "300"
+      - key: LLM_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false

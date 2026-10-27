@@ -1,0 +1,9 @@
+# Lean runtime deps for Render (catalog is prebuilt — no datasets/streamlit/pytest).
+fastapi
+uvicorn[standard]
+pandas
+pyarrow
+httpx
+pydantic
+python-dotenv
+groq

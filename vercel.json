@@ -1,0 +1,25 @@
+{
+  "buildCommand": "node scripts/write-api-config.js",
+  "outputDirectory": "app/ui/web",
+  "framework": null,
+  "headers": [
+    {
+      "source": "/assets/config.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

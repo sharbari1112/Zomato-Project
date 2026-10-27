@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "m1-9-restaurant-recommender"
+version = "0.1.0"
+description = "AI-powered restaurant recommendation service (Zomato use case)"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets",
+    "pandas",
+    "pyarrow",
+    "fastapi",
+    "uvicorn[standard]",
+    "httpx",
+    "pydantic",
+    "python-dotenv",
+    "streamlit",
+    "groq",
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.setuptools.package-data]
+app = ["ui/web/**/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

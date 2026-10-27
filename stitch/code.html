@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.18);
+  }
+}
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.35); }
+  65% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.stagger-1 { animation-delay: 50ms; }
+.stagger-2 { animation-delay: 170ms; }
+.stagger-3 { animation-delay: 290ms; }
+.stagger-4 { animation-delay: 410ms; }
+.stagger-5 { animation-delay: 530ms; }
+.pulse-indicator {
+  animation: pulseGlow 2.4s ease-in-out infinite;
+}
+.heart-pop-anim {
+  animation: heartPop 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .pulse-indicator,
+  .heart-pop-anim {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .card-hover-effect,
+  .btn-hover-effect {
+    transition: none !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container":"#f0edf1","inverse-primary":"#abcfb2","surface-bright":"#fbf8fc","on-primary-fixed":"#01210f","on-background":"#1b1b1e","on-primary-container":"#c5eacc","tertiary-fixed":"#ffdea4","secondary":"#a13e28","error":"#ba1a1a","surface-container-low":"#f6f2f7","on-tertiary-container":"#ffdda0","surface":"#fbf8fc","tertiary-fixed-dim":"#eec067","inverse-on-surface":"#f3f0f4","secondary-container":"#fd8367","surface-container-highest":"#e4e1e6","outline":"#727972","on-tertiary-fixed":"#261900","on-tertiary":"#ffffff","surface-container-high":"#eae7eb","on-primary":"#ffffff","background":"#fbf8fc","on-tertiary-fixed-variant":"#5d4200","on-secondary-fixed-variant":"#822714","on-primary-fixed-variant":"#2e4e37","on-error":"#ffffff","surface-dim":"#dcd9dd","tertiary-container":"#815e09","tertiary":"#644700","on-secondary-container":"#721c09","secondary-fixed-dim":"#ffb4a3","on-secondary-fixed":"#3d0600","primary":"#32533c","outline-variant":"#c2c8c0","surface-tint":"#45664e","primary-fixed-dim":"#abcfb2","surface-container-lowest":"#ffffff","on-error-container":"#93000a","on-secondary":"#ffffff","primary-container":"#4a6b53","error-container":"#ffdad6","on-surface":"#1b1b1e","primary-fixed":"#c7ecce","on-surface-variant":"#424842","inverse-surface":"#303033","secondary-fixed":"#ffdad2","surface-variant":"#e4e1e6"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-sm":"0.5rem","margin":"2.5rem","margin-mobile":"1.25rem","space-xl":"2.5rem","gutter":"1.5rem","space-lg":"1.5rem","gutter-sm":"1rem","space-xs":"0.25rem","space-md":"1rem"},fontFamily:{"headline-lg-mobile":["Playfair Display"],"headline-md":["Playfair Display"],"label-caps":["Plus Jakarta Sans"],"display-hero":["Playfair Display"],"display-hero-mobile":["Playfair Display"],"body-sm":["Plus Jakarta Sans"],"title-editorial":["Playfair Display"],"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Playfair Display"],"label-lg":["Plus Jakarta Sans"],"headline-sm":["Playfair Display"]},fontSize:{"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"label-caps":["11px",{lineHeight:"14px",letterSpacing:"0.08em",fontWeight:"700"}],"display-hero":["48px",{lineHeight:"56px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-hero-mobile":["34px",{lineHeight:"42px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"19px",fontWeight:"400"}],"title-editorial":["18px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"600"}],"body-md":["15px",{lineHeight:"23px",fontWeight:"400"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"600"}],"body-lg":["17px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.015em",fontWeight:"500"}],"label-lg":["14px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 max-w-5xl mx-auto px-margin-mobile md:px-margin flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="PlateMatch Logo" class="h-8 w-auto object-contain transition-transform duration-300 hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1UsjLdwqUsHRXDw8uop4clfwk7cLSIoDuXBl0Wh_xBeUvSQ90Uusad2ZB2Dw1fuMn9dJAsCS3qq8T2GBWSP12UqRV4XMe5_fFs87jtrIFfjISxUO7kSdsjTX0iKrA75cNsJhaOJu_HvLgLnTDzUpxaTDQ7ewwgTvTcycyUGJNFN-lLstD6RPah7vPZ1tZDsZgPXFp6GIdrwywhLfiOkQl_uBt39GzJlfZL8PwokLQsU"/><span class="font-title-editorial text-title-editorial text-primary tracking-tight">PlateMatch</span><span class="hidden sm:inline-block font-label-caps text-label-caps text-on-surface-variant bg-surface-container-low px-2.5 py-1 rounded-full">Bangalore Catalog • AI Ranked</span></div><nav class="flex items-center gap-space-sm" data-active-classes="bg-surface-container-high text-on-surface font-label-md"><a aria-current="page" class="px-3 py-1.5 rounded-lg transition-colors bg-surface-container-high text-on-surface font-label-md" data-path="neighborhood-curations" href="#">Curations</a><a class="px-3 py-1.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" data-path="browse-catalog" href="#">Browse Catalog</a><a class="px-3 py-1.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" data-path="how-it-works" href="#">How It Works</a><div class="ml-2 w-8 h-8 rounded-full bg-primary hover:bg-primary-container transition-transform duration-200 hover:scale-105 flex items-center justify-center shrink-0 cursor-pointer shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></nav></div></header><main class="w-full pt-16 min-h-[calc(100vh-140px)]"><div class="max-w-5xl mx-auto px-margin-mobile md:px-margin"><div class="flex flex-col w-full pb-space-xl">
+<!-- Sticky Query Contextual Bar -->
+<div class="sticky top-16 z-40 bg-surface/95 backdrop-blur-md py-space-sm -mx-margin-mobile md:-mx-margin px-margin-mobile md:px-margin mb-space-lg shadow-sm animate-fade-in-up stagger-1">
+<div class="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0">tune</span>
+<div class="font-body-sm text-body-sm truncate">
+<span class="font-label-md text-label-md text-on-surface">Active query:</span>
+<span class="text-on-surface-variant ml-1">Banashankari • Medium budget (≤₹1,200) • Italian • Rating 4.0+</span>
+</div>
+</div>
+<div class="flex items-center self-end sm:self-auto shrink-0">
+<button class="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all active:scale-95 shadow-sm" id="btn-edit-pref" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary group-hover:rotate-12 transition-transform duration-200">edit</span>
+<span>Edit preferences</span>
+</button>
+</div>
+</div>
+</div>
+<!-- AI Synthesized Summary Banner -->
+<section class="w-full bg-primary-fixed/25 rounded-2xl p-space-md md:p-space-lg mb-space-xl shadow-sm animate-fade-in-up stagger-2">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-xs mb-space-xs">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+</div>
+<h2 class="font-title-editorial text-title-editorial text-on-surface">Curated Bangalore Tasting Dossier</h2>
+</div>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container-highest/80 text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-2 h-2 rounded-full bg-primary pulse-indicator shrink-0"></span>
+        AI Ranked • Realtime Match
+      </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1.5 max-w-3xl leading-relaxed">
+      Three solid Italian picks in Banashankari in the medium band, selected for family-friendly seating, handmade pasta options, and relaxed dinner pacing.
+    </p>
+<!-- Taste Match Metrics -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm mt-space-md pt-space-sm bg-surface-container-lowest/60 rounded-xl p-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Catalog Match</p>
+<p class="font-label-lg text-label-lg text-on-surface font-semibold">100% Verified</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Band Target</p>
+<p class="font-label-lg text-label-lg text-on-surface font-semibold">≤ ₹1,200 for Two</p>
+</div>
+</div>
+<div class="col-span-2 sm:col-span-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">family_restroom</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Ambience Profile</p>
+<p class="font-label-lg text-label-lg text-on-surface font-semibold">Family &amp; Leisure</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section Header -->
+<div class="flex items-baseline justify-between mb-space-md px-1 animate-fade-in-up stagger-2">
+<div>
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Verified Bangalore Catalog</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mt-0.5">Recommended Trattorias</h1>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3 results sorted by LLM confidence</span>
+</div>
+<!-- Recommendations Stack -->
+<div class="flex flex-col gap-space-lg w-full">
+<!-- CARD #1: Top Pick -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md md:p-space-lg shadow-sm hover:shadow-[0_12px_28px_-6px_rgba(27,27,30,0.08),0_4px_12px_-2px_rgba(27,27,30,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 group flex flex-col md:flex-row gap-space-md md:gap-space-lg animate-fade-in-up stagger-3 relative">
+<!-- Media Aspect -->
+<div class="relative w-full md:w-5/12 h-56 md:h-auto min-h-[220px] rounded-xl overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-400 ease-out" data-alt="Intimate rustic Italian trattoria dining hall with warm terracotta accents, wood-fired hearth oven glow in the background, leafy indoor olive planters, soft evening ambient table lights, artisanal handmade tagliatelle on a ceramic plate, editorial food journalism style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJD4SFQlEoNv4cXZN-Vzmo2QtWYfkd8leD5BPRr8AV7gyWNPX6S_rN9exrpy0CjFMPIh5U5MmMo4HMySyTH5i9pHAyWsduUCknXbGfIRcJiex0uDJSxCs4tRMWWCjJek6Q6AXLqCqlMMVCI0WGl8gnDb6BP_AHjcSt24HtzcT9MNLxkyWWF5_KfDsYhTSaHbGjFYbXv3Uv0O-u4CFi-4k4C_L2XkSH-h35PnRhb8M"/>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary text-on-secondary shadow-sm">
+<span class="material-symbols-outlined text-[15px]">workspace_premium</span>
+<span class="font-label-caps text-label-caps tracking-wide uppercase">#1 Top Pick</span>
+</div>
+<!-- Bookmark / Favorite Button -->
+<button aria-label="Favorite Toscano &amp; Co. Trattoria" class="btn-favorite absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/85 hover:bg-surface-container-lowest text-on-surface-variant hover:text-secondary backdrop-blur-md shadow-sm flex items-center justify-center transition-all duration-200 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[18px] transition-colors">favorite_border</span>
+</button>
+<div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-surface/90 backdrop-blur-sm shadow-sm flex items-center gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Match Score:</span>
+<span class="font-label-md text-label-md text-primary font-bold match-counter" data-target="98">98%</span>
+</div>
+</div>
+<!-- Card Core Details -->
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-1.5">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Toscano &amp; Co. Trattoria</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+                Banashankari 2nd Stage, Bangalore
+              </p>
+</div>
+<!-- Rating Pill -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container shrink-0 transition-transform duration-200 group-hover:scale-105">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md font-bold">4.5</span>
+</div>
+</div>
+<!-- Price & Cuisine Tags -->
+<div class="flex flex-wrap items-center gap-1.5 my-space-sm">
+<span class="font-label-md text-label-md text-primary font-semibold px-2 py-0.5 rounded bg-primary-fixed/40">
+              ₹950 for two
+            </span>
+<span class="text-outline-variant">•</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Italian</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Wood-fired Pizza</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Artisan Pasta</span>
+</div>
+<!-- AI Synthesis Box -->
+<div class="bg-surface-container-low/90 rounded-xl p-3 my-space-sm relative border border-transparent hover:border-outline-variant/40 transition-colors">
+<div class="flex items-center gap-1.5 mb-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wide">Why PlateMatch Selected This</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Matches your medium budget and Italian preference with room to spare. Known for generous family portions, quiet indoor booth seating, and authentic wood-fired crusts that score exceptionally well on weekend evenings.
+            </p>
+</div>
+</div>
+<!-- Catalog Facts & Action Bar -->
+<div class="pt-space-xs flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-transparent hover:border-outline-variant/60 hover:-translate-y-0.5 transition-all text-on-surface-variant font-label-caps text-label-caps cursor-default">
+<span class="material-symbols-outlined text-[13px] text-primary">eco</span>
+              Vegetarian Friendly
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-transparent hover:border-outline-variant/60 hover:-translate-y-0.5 transition-all text-on-surface-variant font-label-caps text-label-caps cursor-default">
+<span class="material-symbols-outlined text-[13px] text-outline">restaurant</span>
+              Dine-in Only
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-transparent hover:border-outline-variant/60 hover:-translate-y-0.5 transition-all text-on-surface-variant font-label-caps text-label-caps cursor-default">
+<span class="material-symbols-outlined text-[13px] text-outline">deck</span>
+              Outdoor Verandah
+            </span>
+</div>
+<button class="action-btn group/btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:bg-primary-container transition-all active:scale-[0.97] ml-auto" data-action="Reserve Table at Toscano &amp; Co." type="button">
+<span>Reserve Table</span>
+<span class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-1 transition-transform duration-200">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- CARD #2: Recommended -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md md:p-space-lg shadow-sm hover:shadow-[0_12px_28px_-6px_rgba(27,27,30,0.08),0_4px_12px_-2px_rgba(27,27,30,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 group flex flex-col md:flex-row gap-space-md md:gap-space-lg animate-fade-in-up stagger-4 relative">
+<!-- Media Aspect -->
+<div class="relative w-full md:w-5/12 h-56 md:h-auto min-h-[220px] rounded-xl overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-400 ease-out" data-alt="Elegant contemporary Italian dining restaurant with dark wood tables, wine glasses catching warm amber chandelier reflections, fresh handmade spinach ravioli topped with sage butter, cozy family booth banquettes in Banashankari, upscale gourmet presentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUBCUBdZdwhXtRoIqPUbq0JgZvydUeZLMYifjgTtIiXsB6Lmct8pvxxovs1a8w1EXQoYq1Uaw-E0yyslC0TDArLYsQXf5SDMzNW5e0zpS84K0ZqVYFA1FrmiRClih0K3q6R1eCuxZ47PkMgcoht-umsn_KjVmhXN2Z_6BdS27s8-yeIWF7AvaUN7RJ4clfia2WMMgMc342ZKPZ_wY6kOS2SyA44ULaJzOfsXtRuH8"/>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[15px]">recommend</span>
+<span class="font-label-caps text-label-caps tracking-wide uppercase">#2 Recommended</span>
+</div>
+<!-- Bookmark / Favorite Button -->
+<button aria-label="Favorite Chianti Osteria &amp; Pizzeria" class="btn-favorite absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/85 hover:bg-surface-container-lowest text-on-surface-variant hover:text-secondary backdrop-blur-md shadow-sm flex items-center justify-center transition-all duration-200 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[18px] transition-colors">favorite_border</span>
+</button>
+<div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-surface/90 backdrop-blur-sm shadow-sm flex items-center gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Match Score:</span>
+<span class="font-label-md text-label-md text-primary font-bold match-counter" data-target="94">94%</span>
+</div>
+</div>
+<!-- Card Core Details -->
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-1.5">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Chianti Osteria &amp; Pizzeria</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+                Near Deve Gowda Petrol Bunk, Banashankari 3rd Stage
+              </p>
+</div>
+<!-- Rating Pill -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container shrink-0 transition-transform duration-200 group-hover:scale-105">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md font-bold">4.3</span>
+</div>
+</div>
+<!-- Price & Cuisine Tags -->
+<div class="flex flex-wrap items-center gap-1.5 my-space-sm">
+<span class="font-label-md text-label-md text-primary font-semibold px-2 py-0.5 rounded bg-primary-fixed/40">
+              ₹1,100 for two
+            </span>
+<span class="text-outline-variant">•</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Italian</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Wine &amp; Dine</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Desserts</span>
+</div>
+<!-- AI Synthesis Box -->
+<div class="bg-surface-container-low/90 rounded-xl p-3 my-space-sm relative border border-transparent hover:border-outline-variant/40 transition-colors">
+<div class="flex items-center gap-1.5 mb-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wide">Why PlateMatch Selected This</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Hits the upper end of your medium budget. Recommended for its relaxed pace and attentive staff; the spinach ravioli and tiramisu consistently receive top feedback from family tables.
+            </p>
+</div>
+</div>
+<!-- Catalog Facts & Action Bar -->
+<div class="pt-space-xs flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-transparent hover:border-outline-variant/60 hover:-translate-y-0.5 transition-all text-on-surface-variant font-label-caps text-label-caps cursor-default">
+<span class="material-symbols-outlined text-[13px] text-outline">mode_fan</span>
+              Air Conditioned
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-transparent hover:border-outline-variant/60 hover:-translate-y-0.5 transition-all text-on-surface-variant font-label-caps text-label-caps cursor-default">
+<span class="material-symbols-outlined text-[13px] text-secondary">event_seat</span>
+              Reservations Recommended
+            </span>
+</div>
+<button class="action-btn group/btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all active:scale-[0.97] ml-auto" data-action="Opening menu for Chianti Osteria" type="button">
+<span>View Menu</span>
+<span class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-1 transition-transform duration-200">menu_book</span>
+</button>
+</div>
+</div>
+</article>
+<!-- CARD #3: Value Contender -->
+<article class="bg-surface-container-lowest rounded-2xl p-space-md md:p-space-lg shadow-sm hover:shadow-[0_12px_28px_-6px_rgba(27,27,30,0.08),0_4px_12px_-2px_rgba(27,27,30,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 group flex flex-col md:flex-row gap-space-md md:gap-space-lg animate-fade-in-up stagger-5 relative">
+<!-- Media Aspect -->
+<div class="relative w-full md:w-5/12 h-56 md:h-auto min-h-[220px] rounded-xl overflow-hidden shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-400 ease-out" data-alt="Sunlit welcoming family Italian trattoria interior in South Bangalore, checkered table runners, crispy thin crust vegetarian pizza with basil and sundried tomatoes, airy open family dining layout, clean inviting Mediterranean decor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu8K97FYrDv6zutc6gA6vely7NT8kWquIN9DQ5EDoZMVii3v1DhFs46EuyguwiZGFG0EZ7PCgs37Db8BsXOYiuVVj_VKNSWo9dHW0YItlV6ybpP8AZ83yGrhZ1GAFi4ojljYr3vw5GgRroubprvbexZ2fYBfij_8GE-1VQrFx8N1tz0c1NLQhw0PpRqVhGPVhlPGcPkt_r1OukJrF9bw7yxJ1dpjK_TVOWmk6fTE4"/>
+<div class="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-highest text-on-surface shadow-sm">
+<span class="material-symbols-outlined text-[15px] text-tertiary">savings</span>
+<span class="font-label-caps text-label-caps tracking-wide uppercase">#3 Value Contender</span>
+</div>
+<!-- Bookmark / Favorite Button -->
+<button aria-label="Favorite Little Italy Trattoria" class="btn-favorite absolute top-3 right-3 w-8 h-8 rounded-full bg-surface-container-lowest/85 hover:bg-surface-container-lowest text-on-surface-variant hover:text-secondary backdrop-blur-md shadow-sm flex items-center justify-center transition-all duration-200 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[18px] transition-colors">favorite_border</span>
+</button>
+<div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-surface/90 backdrop-blur-sm shadow-sm flex items-center gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Match Score:</span>
+<span class="font-label-md text-label-md text-primary font-bold match-counter" data-target="90">90%</span>
+</div>
+</div>
+<!-- Card Core Details -->
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-1.5">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Little Italy Trattoria</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+                100ft Ring Road, Banashankari
+              </p>
+</div>
+<!-- Rating Pill -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container shrink-0 transition-transform duration-200 group-hover:scale-105">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md font-bold">4.2</span>
+</div>
+</div>
+<!-- Price & Cuisine Tags -->
+<div class="flex flex-wrap items-center gap-1.5 my-space-sm">
+<span class="font-label-md text-label-md text-primary font-semibold px-2 py-0.5 rounded bg-primary-fixed/40">
+              ₹800 for two
+            </span>
+<span class="text-outline-variant">•</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Italian</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Pure Vegetarian</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md text-label-md">Thin Crust Pizza</span>
+</div>
+<!-- AI Synthesis Box -->
+<div class="bg-surface-container-low/90 rounded-xl p-3 my-space-sm relative border border-transparent hover:border-outline-variant/40 transition-colors">
+<div class="flex items-center gap-1.5 mb-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wide">Why PlateMatch Selected This</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              The safest bet for multi-generational families preferring vegetarian dining. Exceptional value well below the ₹1,200 cap with swift table turnaround and spacious seating.
+            </p>
+</div>
+</div>
+<!-- Catalog Facts & Action Bar -->
+<div class="pt-space-xs flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-transparent hover:border-outline-variant/60 hover:-translate-y-0.5 transition-all text-on-surface-variant font-label-caps text-label-caps cursor-default">
+<span class="material-symbols-outlined text-[13px] text-primary">spa</span>
+              Pure Veg
+            </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-transparent hover:border-outline-variant/60 hover:-translate-y-0.5 transition-all text-on-surface-variant font-label-caps text-label-caps cursor-default">
+<span class="material-symbols-outlined text-[13px] text-outline">accessible</span>
+              Wheelchair Accessible
+            </span>
+</div>
+<button class="action-btn group/btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all active:scale-[0.97] ml-auto" data-action="Exploring Little Italy Trattoria details" type="button">
+<span>Explore Details</span>
+<span class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-1 transition-transform duration-200">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Bottom Clarification / Adjustment Tray -->
+<div class="mt-space-xl pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md bg-surface-container-low rounded-2xl p-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0 transition-transform duration-300 hover:rotate-45">
+<span class="material-symbols-outlined text-[20px]">filter_alt</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-semibold">Want to expand your radius or change the vibe?</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Re-query across 14 other Bangalore culinary clusters including Jayanagar &amp; Koramangala.</p>
+</div>
+</div>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high text-primary font-label-md text-label-md transition-all active:scale-95 shadow-sm whitespace-nowrap" id="btn-adjust-filters" type="button">
+<span class="material-symbols-outlined text-[18px]">page_info</span>
+<span>Adjust Filters</span>
+</button>
+</div>
+</div>
+<!-- Micro-toast container for real-time interactive feedback -->
+<div aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 translate-y-3" id="micro-toast">
+<div class="bg-inverse-surface/95 text-inverse-on-surface backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 font-label-md text-label-md">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]" id="toast-icon">check_circle</span>
+<span id="toast-message">Filter preferences updated</span>
+</div>
+</div>
+<script>
+  // Toast notifications helper
+  const toast = document.getElementById('micro-toast');
+  const toastMsg = document.getElementById('toast-message');
+  const toastIcon = document.getElementById('toast-icon');
+  let toastTimer;
+
+  function showToast(message, icon = 'check_circle') {
+    if (!toast) return;
+    toastMsg.textContent = message;
+    toastIcon.textContent = icon;
+    toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+    toast.classList.add('opacity-100', 'translate-y-0');
+    
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+    }, 2800);
+  }
+
+  // Count-up animation for match score badges (respecting prefers-reduced-motion)
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!isReducedMotion) {
+    document.querySelectorAll('.match-counter').forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-target') || '90', 10);
+      let current = Math.max(0, target - 18);
+      counter.textContent = current + '%';
+      
+      const duration = 800;
+      const stepTime = Math.abs(Math.floor(duration / (target - current)));
+      const timer = setInterval(() => {
+        current++;
+        counter.textContent = current + '%';
+        if (current >= target) {
+          clearInterval(timer);
+          counter.textContent = target + '%';
+        }
+      }, stepTime);
+    });
+  }
+
+  // Favorite / Bookmark heart pop interaction
+  document.querySelectorAll('.btn-favorite').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const icon = btn.querySelector('.material-symbols-outlined');
+      const isFav = btn.getAttribute('data-favorited') === 'true';
+      
+      btn.classList.remove('heart-pop-anim');
+      void btn.offsetWidth; // Force DOM reflow to retrigger animation
+      btn.classList.add('heart-pop-anim');
+
+      if (!isFav) {
+        btn.setAttribute('data-favorited', 'true');
+        icon.textContent = 'favorite';
+        icon.classList.add('text-secondary');
+        icon.style.fontVariationSettings = "'FILL' 1";
+        showToast('Saved to your Curations', 'bookmark_added');
+      } else {
+        btn.setAttribute('data-favorited', 'false');
+        icon.textContent = 'favorite_border';
+        icon.classList.remove('text-secondary');
+        icon.style.fontVariationSettings = "'FILL' 0";
+        showToast('Removed from Curations', 'bookmark_remove');
+      }
+    });
+  });
+
+  // Action buttons toast triggers
+  document.querySelectorAll('.action-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const actionName = btn.getAttribute('data-action') || 'Action completed';
+      showToast(actionName, 'restaurant');
+    });
+  });
+
+  // Filter adjust buttons
+  const btnAdjust = document.getElementById('btn-adjust-filters');
+  if (btnAdjust) {
+    btnAdjust.addEventListener('click', () => {
+      showToast('Opening neighborhood filter drawer...', 'tune');
+    });
+  }
+
+  const btnEditPref = document.getElementById('btn-edit-pref');
+  if (btnEditPref) {
+    btnEditPref.addEventListener('click', () => {
+      showToast('Opening Banashankari taste preferences...', 'tune');
+    });
+  }
+</script></div></main><footer class="w-full bg-surface-container-low/70 py-space-lg"><div class="max-w-5xl mx-auto px-margin-mobile md:px-margin text-center flex flex-col items-center justify-center gap-space-xs"><p class="font-body-sm text-body-sm text-on-surface-variant">PlateMatch • Catalog data verified across Bangalore neighborhoods • AI rankings reflect taste, mood &amp; crowd fit.</p></div></footer></body></html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlateMatch — Bangalore restaurant recommendations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/app.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "surface-container": "#f0edf1",
+              "inverse-primary": "#abcfb2",
+              "surface-bright": "#fbf8fc",
+              "on-primary-fixed": "#01210f",
+              "on-background": "#1b1b1e",
+              "on-primary-container": "#c5eacc",
+              "tertiary-fixed": "#ffdea4",
+              secondary: "#a13e28",
+              error: "#ba1a1a",
+              "surface-container-low": "#f6f2f7",
+              "on-tertiary-container": "#ffdda0",
+              surface: "#fbf8fc",
+              "tertiary-fixed-dim": "#eec067",
+              "inverse-on-surface": "#f3f0f4",
+              "secondary-container": "#fd8367",
+              "surface-container-highest": "#e4e1e6",
+              outline: "#727972",
+              "on-tertiary-fixed": "#261900",
+              "on-tertiary": "#ffffff",
+              "surface-container-high": "#eae7eb",
+              "on-primary": "#ffffff",
+              background: "#fbf8fc",
+              "on-tertiary-fixed-variant": "#5d4200",
+              "on-secondary-fixed-variant": "#822714",
+              "on-primary-fixed-variant": "#2e4e37",
+              "on-error": "#ffffff",
+              "surface-dim": "#dcd9dd",
+              "tertiary-container": "#815e09",
+              tertiary: "#644700",
+              "on-secondary-container": "#721c09",
+              "secondary-fixed-dim": "#ffb4a3",
+              "on-secondary-fixed": "#3d0600",
+              primary: "#32533c",
+              "outline-variant": "#c2c8c0",
+              "surface-tint": "#45664e",
+              "primary-fixed-dim": "#abcfb2",
+              "surface-container-lowest": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "primary-container": "#4a6b53",
+              "error-container": "#ffdad6",
+              "on-surface": "#1b1b1e",
+              "primary-fixed": "#c7ecce",
+              "on-surface-variant": "#424842",
+              "inverse-surface": "#303033",
+              "secondary-fixed": "#ffdad2",
+              "surface-variant": "#e4e1e6",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              full: "9999px",
+            },
+            spacing: {
+              "space-sm": "0.5rem",
+              margin: "2.5rem",
+              "margin-mobile": "1.25rem",
+              "space-xl": "2.5rem",
+              gutter: "1.5rem",
+              "space-lg": "1.5rem",
+              "gutter-sm": "1rem",
+              "space-xs": "0.25rem",
+              "space-md": "1rem",
+            },
+            fontFamily: {
+              display: ['"Playfair Display"', "Georgia", "serif"],
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background font-sans text-on-surface antialiased">
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"
+    >
+      <div
+        class="h-16 max-w-5xl mx-auto px-margin-mobile md:px-margin flex items-center justify-between"
+      >
+        <button
+          type="button"
+          id="brand-home"
+          class="flex items-center gap-space-md text-left"
+        >
+          <span
+            class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm"
+          >
+            <span class="material-symbols-outlined text-[18px]">restaurant</span>
+          </span>
+          <span class="font-display text-[18px] font-semibold text-primary tracking-tight"
+            >PlateMatch</span
+          >
+          <span
+            class="hidden sm:inline-block font-sans text-[11px] font-bold uppercase tracking-[0.08em] text-on-surface-variant bg-surface-container-low px-2.5 py-1 rounded-full"
+            >Bangalore Catalog · AI Ranked</span
+          >
+        </button>
+        <nav class="flex items-center gap-space-sm">
+          <a
+            href="#preferences"
+            class="px-3 py-1.5 rounded-lg text-[12px] font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors"
+            >Preferences</a
+          >
+          <a
+            href="#how-it-works"
+            class="hidden sm:inline-block px-3 py-1.5 rounded-lg text-[12px] font-semibold text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors"
+            >How It Works</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="w-full pt-16 min-h-[calc(100vh-120px)]">
+      <div class="max-w-5xl mx-auto px-margin-mobile md:px-margin pb-space-xl">
+        <!-- Catalog error -->
+        <section
+          id="view-error"
+          class="hidden pt-space-xl animate-fade-in-up"
+          aria-live="polite"
+        >
+          <div
+            class="bg-error-container text-on-error-container rounded-2xl p-space-lg border border-error/20"
+          >
+            <h2 class="font-display text-2xl font-semibold mb-2">Catalog unavailable</h2>
+            <p id="error-detail" class="text-[15px] leading-relaxed"></p>
+          </div>
+        </section>
+
+        <!-- Preferences -->
+        <section id="view-preferences" class="pt-space-xl">
+          <div class="animate-fade-in-up stagger-1 mb-space-xl max-w-2xl">
+            <p
+              class="font-sans text-[11px] font-bold uppercase tracking-[0.08em] text-primary mb-2"
+            >
+              Bangalore dining guide
+            </p>
+            <h1
+              class="font-display text-[34px] md:text-[48px] font-semibold leading-tight tracking-tight text-on-surface"
+            >
+              PlateMatch
+            </h1>
+            <p class="mt-3 text-[17px] leading-relaxed text-on-surface-variant max-w-xl">
+              Find Bangalore places that fit how you actually decide. Filters run on catalog
+              facts first; AI ranks the shortlist and explains each pick.
+            </p>
+          </div>
+
+          <form
+            id="prefs-form"
+            class="animate-fade-in-up stagger-2 bg-surface-container-lowest rounded-2xl border border-[#E6E4DF] shadow-[0_2px_8px_rgba(24,24,27,0.03)] p-space-md md:p-space-lg max-w-2xl"
+          >
+            <div class="grid gap-space-md">
+              <label class="block">
+                <span
+                  class="block font-sans text-[12px] font-semibold tracking-wide text-on-surface mb-1.5"
+                  >Location</span
+                >
+                <select
+                  id="field-location"
+                  name="location"
+                  required
+                  class="field-focus w-full h-12 px-3 rounded-xl bg-white border-[1.5px] border-[#E6E4DF] text-[15px] text-on-surface"
+                ></select>
+              </label>
+
+              <fieldset>
+                <legend
+                  class="font-sans text-[12px] font-semibold tracking-wide text-on-surface mb-1.5"
+                >
+                  Budget
+                </legend>
+                <div class="flex flex-wrap gap-2" id="budget-group" role="group">
+                  <button type="button" class="budget-pill px-4 h-[34px] rounded-full border border-[#E6E4DF] bg-white text-[12px] font-semibold text-[#3F3F46] transition-colors" data-budget="low" aria-pressed="false">Low</button>
+                  <button type="button" class="budget-pill px-4 h-[34px] rounded-full border border-[#E6E4DF] bg-white text-[12px] font-semibold text-[#3F3F46] transition-colors" data-budget="medium" aria-pressed="true">Medium</button>
+                  <button type="button" class="budget-pill px-4 h-[34px] rounded-full border border-[#E6E4DF] bg-white text-[12px] font-semibold text-[#3F3F46] transition-colors" data-budget="high" aria-pressed="false">High</button>
+                </div>
+                <p id="budget-caption" class="mt-2 text-[13px] text-on-surface-variant"></p>
+                <input type="hidden" id="field-budget" name="budget" value="medium" />
+              </fieldset>
+
+              <label class="block">
+                <span
+                  class="block font-sans text-[12px] font-semibold tracking-wide text-on-surface mb-1.5"
+                  >Cuisine</span
+                >
+                <select
+                  id="field-cuisine"
+                  name="cuisine"
+                  required
+                  class="field-focus w-full h-12 px-3 rounded-xl bg-white border-[1.5px] border-[#E6E4DF] text-[15px] text-on-surface"
+                ></select>
+              </label>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                <label class="block">
+                  <span
+                    class="block font-sans text-[12px] font-semibold tracking-wide text-on-surface mb-1.5"
+                    >Minimum rating</span
+                  >
+                  <input
+                    id="field-rating"
+                    name="min_rating"
+                    type="number"
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    value="4.0"
+                    required
+                    class="field-focus w-full h-12 px-3 rounded-xl bg-white border-[1.5px] border-[#E6E4DF] text-[15px] text-on-surface"
+                  />
+                </label>
+                <label class="block">
+                  <span
+                    class="block font-sans text-[12px] font-semibold tracking-wide text-on-surface mb-1.5"
+                    >How many results</span
+                  >
+                  <input
+                    id="field-top-k"
+                    name="top_k"
+                    type="number"
+                    min="1"
+                    max="10"
+                    step="1"
+                    value="3"
+                    required
+                    class="field-focus w-full h-12 px-3 rounded-xl bg-white border-[1.5px] border-[#E6E4DF] text-[15px] text-on-surface"
+                  />
+                </label>
+              </div>
+
+              <label class="block">
+                <span
+                  class="block font-sans text-[12px] font-semibold tracking-wide text-on-surface mb-1.5"
+                  >Additional notes
+                  <span class="font-normal text-on-surface-variant">(optional)</span></span
+                >
+                <input
+                  id="field-notes"
+                  name="notes"
+                  type="text"
+                  value="family-friendly"
+                  placeholder="e.g. family-friendly, quiet, quick service"
+                  class="field-focus w-full h-12 px-3 rounded-xl bg-white border-[1.5px] border-[#E6E4DF] text-[15px] text-on-surface"
+                />
+              </label>
+            </div>
+
+            <p class="mt-space-md text-[13px] text-on-surface-variant">
+              Notes guide the AI ranking — they are not hard filters.
+            </p>
+
+            <button
+              id="btn-submit"
+              type="submit"
+              class="mt-space-lg w-full sm:w-auto inline-flex items-center justify-center gap-2 h-11 px-6 rounded-xl bg-primary-container text-on-primary font-semibold text-[14px] shadow-sm hover:bg-primary transition-colors active:scale-[0.98]"
+            >
+              <span class="material-symbols-outlined text-[18px]">search</span>
+              Find restaurants
+            </button>
+          </form>
+
+          <section id="how-it-works" class="mt-space-xl max-w-2xl animate-fade-in-up stagger-3">
+            <h2 class="font-display text-xl font-semibold text-on-surface mb-2">How it works</h2>
+            <ol class="space-y-2 text-[15px] text-on-surface-variant leading-relaxed list-decimal list-inside">
+              <li>Structured filters narrow the Bangalore catalog (location, budget, cuisine, rating).</li>
+              <li>The model ranks that shortlist and writes grounded explanations.</li>
+              <li>If the model is unavailable, you still get catalog-backed cards by rating.</li>
+            </ol>
+          </section>
+        </section>
+
+        <!-- Loading -->
+        <section id="view-loading" class="hidden pt-space-xl" aria-live="polite">
+          <div
+            class="bg-primary-fixed/25 rounded-2xl p-space-lg flex items-center gap-3 animate-fade-in-up"
+          >
+            <span class="material-symbols-outlined text-primary text-[28px] animate-spin"
+              >progress_activity</span
+            >
+            <div>
+              <p class="font-display text-lg font-semibold">Curating your shortlist…</p>
+              <p class="text-[14px] text-on-surface-variant">
+                Filtering the catalog, then ranking with PlateMatch.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Empty / no matches -->
+        <section id="view-empty" class="hidden pt-space-xl animate-fade-in-up" aria-live="polite">
+          <div
+            class="bg-surface-container-lowest rounded-2xl border border-[#E6E4DF] p-space-xl text-center max-w-xl mx-auto"
+          >
+            <div
+              class="mx-auto w-14 h-14 rounded-full bg-surface-container flex items-center justify-center text-primary mb-4"
+            >
+              <span class="material-symbols-outlined text-[28px]">ramen_dining</span>
+            </div>
+            <h2 class="font-display text-2xl font-semibold mb-2">
+              No restaurants matched those filters
+            </h2>
+            <p id="empty-hint" class="text-[15px] text-on-surface-variant mb-6">
+              Try a nearby Bangalore neighborhood, a wider cuisine, or lower the minimum rating.
+            </p>
+            <button
+              type="button"
+              class="btn-edit-prefs inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary-container text-on-primary font-semibold text-[14px]"
+            >
+              Adjust preferences
+            </button>
+          </div>
+        </section>
+
+        <!-- Results -->
+        <section id="view-results" class="hidden pt-space-md">
+          <div
+            class="sticky top-16 z-40 bg-surface/95 backdrop-blur-md py-space-sm -mx-margin-mobile md:-mx-margin px-margin-mobile md:px-margin mb-space-lg shadow-sm animate-fade-in-up stagger-1"
+          >
+            <div
+              class="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm"
+            >
+              <div class="flex items-center gap-space-xs text-on-surface-variant min-w-0">
+                <span class="material-symbols-outlined text-primary text-[20px] shrink-0"
+                  >tune</span
+                >
+                <div class="text-[13px] truncate">
+                  <span class="font-semibold text-on-surface">Active query:</span>
+                  <span id="active-query" class="ml-1"></span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn-edit-prefs group flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-[12px] font-semibold transition-all active:scale-95 shadow-sm self-end sm:self-auto"
+              >
+                <span
+                  class="material-symbols-outlined text-[16px] text-primary group-hover:rotate-12 transition-transform duration-200"
+                  >edit</span
+                >
+                Edit preferences
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="fallback-banner"
+            class="hidden mb-space-md rounded-xl bg-surface-container-high/80 px-4 py-3 text-[14px] text-on-surface-variant animate-fade-in-up"
+          >
+            Showing catalog rankings — the language model was unavailable or returned unusable
+            results.
+          </div>
+
+          <section
+            class="w-full bg-primary-fixed/25 rounded-2xl p-space-md md:p-space-lg mb-space-xl shadow-sm animate-fade-in-up stagger-2"
+          >
+            <div
+              class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-xs mb-space-xs"
+            >
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm"
+                >
+                  <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+                </div>
+                <h2 class="font-display text-[18px] font-semibold text-on-surface">
+                  Curated Bangalore Tasting Dossier
+                </h2>
+              </div>
+              <span
+                id="source-chip"
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container-highest/80 text-on-surface-variant text-[11px] font-bold uppercase tracking-wider"
+              >
+                <span class="w-2 h-2 rounded-full bg-primary pulse-indicator shrink-0"></span>
+                AI Ranked
+              </span>
+            </div>
+            <p
+              id="results-summary"
+              class="text-[15px] text-on-surface-variant mt-1.5 max-w-3xl leading-relaxed"
+            ></p>
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm mt-space-md pt-space-sm bg-surface-container-lowest/60 rounded-xl p-3"
+            >
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+                <div>
+                  <p class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
+                    Catalog Match
+                  </p>
+                  <p class="text-[14px] font-semibold text-on-surface">100% Verified</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+                <div>
+                  <p class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
+                    Band Target
+                  </p>
+                  <p id="metric-budget" class="text-[14px] font-semibold text-on-surface">—</p>
+                </div>
+              </div>
+              <div class="col-span-2 sm:col-span-1 flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary text-[18px]"
+                  >family_restroom</span
+                >
+                <div>
+                  <p class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
+                    Ambience Profile
+                  </p>
+                  <p id="metric-notes" class="text-[14px] font-semibold text-on-surface">—</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div
+            class="flex items-baseline justify-between mb-space-md px-1 animate-fade-in-up stagger-2"
+          >
+            <div>
+              <span
+                class="text-[11px] font-bold uppercase tracking-widest text-primary"
+                >Verified Bangalore Catalog</span
+              >
+              <h1
+                id="results-headline"
+                class="font-display text-[26px] md:text-[36px] font-medium text-on-surface mt-0.5"
+              >
+                Recommended picks
+              </h1>
+            </div>
+            <span id="results-count" class="text-[13px] text-on-surface-variant"></span>
+          </div>
+
+          <div id="results-list" class="flex flex-col gap-space-lg w-full"></div>
+
+          <div
+            class="mt-space-xl pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md bg-surface-container-low rounded-2xl p-space-md"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0"
+              >
+                <span class="material-symbols-outlined text-[20px]">filter_alt</span>
+              </div>
+              <div>
+                <p class="text-[14px] font-semibold text-on-surface">
+                  Want to expand your radius or change the vibe?
+                </p>
+                <p class="text-[13px] text-on-surface-variant">
+                  Re-query across other Bangalore culinary clusters.
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn-edit-prefs inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container-lowest hover:bg-surface-container-high text-primary text-[12px] font-semibold transition-all active:scale-95 shadow-sm whitespace-nowrap"
+            >
+              <span class="material-symbols-outlined text-[18px]">page_info</span>
+              Adjust Filters
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="w-full bg-surface-container-low/70 py-space-lg">
+      <div
+        class="max-w-5xl mx-auto px-margin-mobile md:px-margin text-center text-[13px] text-on-surface-variant"
+      >
+        PlateMatch · Catalog data verified across Bangalore neighborhoods · AI rankings reflect
+        taste, mood &amp; crowd fit.
+      </div>
+    </footer>
+
+    <div
+      aria-live="polite"
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 translate-y-3"
+      id="micro-toast"
+    >
+      <div
+        class="bg-inverse-surface/95 text-inverse-on-surface backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 text-[12px] font-semibold"
+      >
+        <span class="material-symbols-outlined text-primary-fixed text-[18px]" id="toast-icon"
+          >check_circle</span
+        >
+        <span id="toast-message">Ready</span>
+      </div>
+    </div>
+
+    <script src="/assets/config.js"></script>
+    <script src="/assets/app.js" type="module"></script>
+  </body>
+</html>

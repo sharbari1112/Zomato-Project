@@ -1,0 +1,12 @@
+# Python 3.11+
+datasets
+pandas
+pyarrow
+fastapi
+uvicorn[standard]
+httpx
+pydantic
+python-dotenv
+streamlit
+groq
+pytest
