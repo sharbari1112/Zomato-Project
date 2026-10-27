@@ -11,6 +11,8 @@ build/
 .mypy_cache/
 .ruff_cache/
 data/*.parquet
+# Baked into the Render Docker image (see Dockerfile); keep this snapshot in git.
+!data/catalog.parquet
 data/*.sqlite
 data/*.db
 .coverage
